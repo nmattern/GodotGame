@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://e5ykmegi3x63"]
+[gd_scene load_steps=8 format=3 uid="uid://e5ykmegi3x63"]
 
 [ext_resource type="Script" path="res://levels/level_1/Player.gd" id="1_orpwx"]
+[ext_resource type="Material" uid="uid://bcexwxg8cnger" path="res://textures/test_grid_dark.tres" id="2_swmnv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6h50"]
 albedo_color = Color(0.0705882, 0, 0.411765, 1)
@@ -16,25 +17,6 @@ material = SubResource("StandardMaterial3D_pkl4l")
 size = Vector3(0.2, 0.2, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_83uqa"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6lgpj"]
-size = Vector3(20, 0.5, 20)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4viv0"]
-diffuse_mode = 1
-specular_mode = 1
-albedo_color = Color(0.121569, 0.164706, 0, 0.505882)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dmi7p"]
-material = SubResource("StandardMaterial3D_4viv0")
-size = Vector3(20, 0.5, 20)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aj8dd"]
-points = PackedVector3Array(0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5)
-
-[sub_resource type="PrismMesh" id="PrismMesh_rhpu2"]
-left_to_right = 0.0
-size = Vector3(1, 0.5, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -66,24 +48,86 @@ spring_length = 6.0
 [node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.42522)
 
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_6lgpj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_dmi7p")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="directional_light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.565326, -0.65611, -0.499925, -0.218464, -0.465332, 0.857753, -0.795412, 0.594126, 0.119728, -8.31425, 11.8481, 0)
 light_energy = 5.718
 
-[node name="Slope" type="StaticBody3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 5, 0.25, 0)
+[node name="directional_light_2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.443196, -0.830415, -0.337622, -0.218464, -0.465332, 0.857753, -0.869397, -0.306394, -0.387649, -8.31425, 26.0604, -91.7978)
+light_energy = 5.718
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-shape = SubResource("ConvexPolygonShape3D_aj8dd")
+[node name="LevelCore" type="CSGCombiner3D" parent="."]
+use_collision = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Slope"]
-mesh = SubResource("PrismMesh_rhpu2")
+[node name="floor" type="CSGBox3D" parent="LevelCore"]
+size = Vector3(35.0098, 0.86069, 36.9257)
+material = ExtResource("2_swmnv")
+
+[node name="walkway" type="CSGPolygon3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5522, 0.440127, 0)
+polygon = PackedVector2Array(-3.59292, -0.0911021, 0.546358, 3.55916, 2.72281, 1.7973, 12.8523, -0.372499)
+material = ExtResource("2_swmnv")
+
+[node name="walkway2" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7007, 0, -14.9015)
+size = Vector3(1, 1, 29.8239)
+material = ExtResource("2_swmnv")
+
+[node name="floor2" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.2028, -2.07284, -58.1115)
+size = Vector3(79.0054, 4.52088, 55.7982)
+material = ExtResource("2_swmnv")
+
+[node name="floor2sub" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7833, 0.318605, -57.2977)
+operation = 2
+size = Vector3(30.2048, 2.76843, 52.3037)
+material = ExtResource("2_swmnv")
+
+[node name="jumpbox" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6136, 1.96184, -35.7615)
+size = Vector3(4.69926, 1.27886, 4.56616)
+material = ExtResource("2_swmnv")
+
+[node name="jumpbox2" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.84086, 4.90704, -35.7615)
+size = Vector3(4.69926, 1.27886, 4.56616)
+material = ExtResource("2_swmnv")
+
+[node name="jumpbox3" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.84086, 7.83249, -42.3943)
+size = Vector3(4.69926, 1.27886, 4.56616)
+material = ExtResource("2_swmnv")
+
+[node name="jumpbox4" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.84086, 10.3537, -49.9836)
+size = Vector3(4.69926, 1.27886, 4.56616)
+material = ExtResource("2_swmnv")
+
+[node name="goal" type="CSGTorus3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1193, 14.8723, -49.6314)
+inner_radius = 1.8715
+outer_radius = 2.93892
+material = ExtResource("2_swmnv")
+
+[node name="sphere" type="CSGSphere3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25512, 0, -22.0918)
+radius = 2.40285
+material = ExtResource("2_swmnv")
+
+[node name="sphere2" type="CSGSphere3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2149, 0, -25.8604)
+radius = 2.09024
+material = ExtResource("2_swmnv")
+
+[node name="sphere_platform_sub" type="CSGBox3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.137, 1.54868, -24.0577)
+operation = 2
+size = Vector3(11.2491, 2.80276, 9.60365)
+material = ExtResource("2_swmnv")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="LevelCore"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.00981, -0.924211, -44.4558)
+radius = 2.2286
+height = 6.24962
+material = ExtResource("2_swmnv")
