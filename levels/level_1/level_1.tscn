@@ -1,52 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://e5ykmegi3x63"]
+[gd_scene load_steps=3 format=3 uid="uid://cybfl1o3ppioj"]
 
-[ext_resource type="Script" path="res://levels/level_1/Player.gd" id="1_orpwx"]
+[ext_resource type="PackedScene" uid="uid://bqhowbbgirkl6" path="res://scripts/entity_scripts/Player/Player.tscn" id="2_6ae6e"]
 [ext_resource type="Material" uid="uid://bcexwxg8cnger" path="res://textures/test_grid_dark.tres" id="2_swmnv"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6h50"]
-albedo_color = Color(0.0705882, 0, 0.411765, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qesal"]
-material = SubResource("StandardMaterial3D_q6h50")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkl4l"]
-albedo_color = Color(0.737255, 0.466667, 0.0862745, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ub4ql"]
-material = SubResource("StandardMaterial3D_pkl4l")
-size = Vector3(0.2, 0.2, 1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_83uqa"]
-
 [node name="Node3D" type="Node3D"]
-
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730326, 0)
-script = ExtResource("1_orpwx")
-rotation_speed = 10
-
-[node name="Pivot" type="Marker3D" parent="Player"]
-
-[node name="Skin" type="MeshInstance3D" parent="Player/Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_qesal")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59125, -0.621951)
-mesh = SubResource("BoxMesh_ub4ql")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_83uqa")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.955232, 0.295858, 0, -0.295858, 0.955232, 0, 1.75363, 0)
-spring_length = 6.0
-
-[node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.42522)
 
 [node name="directional_light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.565326, -0.65611, -0.499925, -0.218464, -0.465332, 0.857753, -0.795412, 0.594126, 0.119728, -8.31425, 11.8481, 0)
@@ -131,3 +88,5 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.0098
 radius = 2.2286
 height = 6.24962
 material = ExtResource("2_swmnv")
+
+[node name="Player" parent="." instance=ExtResource("2_6ae6e")]

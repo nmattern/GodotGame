@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "CharacterBody3D",
+"class": &"Entity",
+"language": &"GDScript",
+"path": "res://scripts/entity_scripts/Entity.gd"
+}]
+_global_script_class_icons={
+"Entity": ""
+}
+
 [application]
 
 config/name="Godot Game"
