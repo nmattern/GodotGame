@@ -1,22 +1,84 @@
 class_name Entity
 extends CharacterBody3D
 
-@export var max_speed = 10
-@export var acceleration = 70
-@export var friction = 10
-@export var air_friction = 10
-@export var gravity = -40
-@export var jump_impulse = 20
-@export var mouse_sensitivity = .1
-@export var controller_sensitivity = 3
-@export var rotation_speed = 25
+@export var max_speed : float = 10
+@export var acceleration : float = 70
+@export var friction : float = 20
+@export var air_friction : float = 10
+@export var gravity : float = -40
+@export var jump_impulse : float = 20
+@export var mouse_sensitivity : float = .1
+@export var controller_sensitivity : float = 3
+@export var rotation_speed : float = 25
 
+@export var max_health : float = 100
+@export var current_health : float = 100
+@export var health_regen : float = 1
+@export var armor : float = 0
+
+@export var max_mana : float = 100
+@export var current_mana : float = 100
+@export var mana_regen : float = 1
+
+@export var max_stamina : float = 100
+@export var current_stamina : float = 100
+@export var stamina_regen : float = 1
+
+@export var ability_1_cooldown : float = 10
+@export var ability_2_cooldown : float = 10
+@export var ability_3_cooldown : float = 10
 
 @onready var spring_arm = $SpringArm3D
 @onready var pivot = $Pivot
 
+
+func regen_health():
+	if (current_health < max_health):
+		if ((health_regen + current_health) > max_health):
+			current_health = max_health
+		else:
+			current_health += health_regen
+			
+			
+func regen_mana():
+	if (current_mana < max_mana):
+		if ((mana_regen + current_mana) > max_mana):
+			current_mana = max_mana
+		else:
+			current_mana += mana_regen
+
+
+func regen_stamina():
+	if (current_stamina < max_stamina):
+		if ((stamina_regen + current_stamina) > max_stamina):
+			current_stamina = max_stamina
+		else:
+			current_stamina += stamina_regen
+			
+			
+func modify_health(amount: float):
+	if current_health + amount > max_health: current_health = max_health
+	elif current_health + amount < 0: current_health = 0
+	else:
+		current_health += amount
+
+
+func modify_mana(amount: float):
+	if current_mana + amount > max_mana: current_mana = max_mana
+	elif current_mana + amount < 0: current_mana = 0
+	else:
+		current_mana += amount
+
+
+func modify_stamina(amount: float):
+	if current_stamina + amount > max_stamina: current_stamina = max_stamina
+	elif current_stamina + amount < 0: current_stamina = 0
+	else:
+		current_stamina += amount
+
+
 ## This is a function to calculate the input vector given defined inputs
-func get_input_vector():
+func get_input_vector() -> Vector3:
 	# this defines the input vector and we subtract move back from move forward 
 	# because the player controller starts facing -z
 	var input_vector = Vector3.ZERO
@@ -25,15 +87,15 @@ func get_input_vector():
 	return input_vector.normalized() if input_vector.length() > 1 else input_vector
 	
 	
-	## This function will calculate the direction from the input vector
+## This function will calculate the direction from the input vector
 ## the direction is helpful for moving the player relative to its current postion
-func get_direction(input_vector):
+func get_direction(input_vector: Vector3) -> Vector3:
 	var direction  = (input_vector.x * transform.basis.x) + (input_vector.z * transform.basis.z)
 	return direction
 	
 	
-	## This function takes the input vector and direction to apply movement to the player
-func apply_movement(input_vector, direction, delta):
+## This function takes the input vector and direction to apply movement to the player
+func apply_movement(input_vector: Vector3, direction: Vector3, delta: float):
 	if direction != Vector3.ZERO:
 		velocity.x = velocity.move_toward(direction * max_speed, acceleration * delta).x
 		velocity.z = velocity.move_toward(direction * max_speed, acceleration * delta).z
@@ -41,8 +103,8 @@ func apply_movement(input_vector, direction, delta):
 		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-input_vector.x, -input_vector.z), rotation_speed * delta)
 		
 		
-		## This function takes the direction of the player and uses it to apply friction
-func apply_friction(direction, delta):
+## This function takes the direction of the player and uses it to apply friction
+func apply_friction(direction: Vector3, delta: float):
 	if direction == Vector3.ZERO:
 		if is_on_floor():
 			velocity = velocity.move_toward(Vector3.ZERO, friction * delta)
@@ -51,7 +113,7 @@ func apply_friction(direction, delta):
 			velocity.z = velocity.move_toward(direction * max_speed, air_friction * delta).z
 			
 			
-			## This function applies the jump_impulse to apply a jumping feature
+## This function applies the jump_impulse to apply a jumping feature
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
@@ -59,8 +121,8 @@ func jump():
 		velocity.y = jump_impulse / 2
 		
 		
-		## This funnction applies gravity to the y position
-func apply_gravity(delta):
+## This funnction applies gravity to the y position
+func apply_gravity(delta: float):
 	velocity.y += gravity * delta
 	velocity.y = clamp(velocity.y, gravity, jump_impulse)
 	
@@ -74,4 +136,6 @@ func apply_controller_rotation():
 	if InputEventJoypadMotion:
 		rotate_y(deg_to_rad(-axis_vector.x) * controller_sensitivity)
 		spring_arm.rotate_x(deg_to_rad(-axis_vector.y) * controller_sensitivity)
+		
+		
 	
