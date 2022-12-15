@@ -1,19 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://e5ykmegi3x63"]
+[gd_scene load_steps=8 format=3 uid="uid://e5ykmegi3x63"]
 
 [ext_resource type="PackedScene" uid="uid://bqhowbbgirkl6" path="res://scripts/entity_scripts/Player/Player.tscn" id="2_6ae6e"]
 [ext_resource type="Material" uid="uid://bcexwxg8cnger" path="res://textures/test_grid_dark.tres" id="2_swmnv"]
 [ext_resource type="PackedScene" uid="uid://dts76apty278w" path="res://utilities/pause_menu/pause_menu.tscn" id="3_a8twt"]
 [ext_resource type="PackedScene" uid="uid://colktv10wis3u" path="res://scripts/object_scripts/portal/Portal.tscn" id="4_6igiq"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_es0du"]
+sky_top_color = Color(0.439216, 0.54902, 0.843137, 1)
+sky_horizon_color = Color(0.760784, 0.921569, 0.972549, 1)
+ground_bottom_color = Color(0.462745, 0.517647, 0.94902, 1)
+ground_horizon_color = Color(0.776471, 0.898039, 0.933333, 1)
+
+[sub_resource type="Sky" id="Sky_nk3vy"]
+sky_material = SubResource("ProceduralSkyMaterial_es0du")
+
+[sub_resource type="Environment" id="Environment_p2565"]
+background_mode = 2
+sky = SubResource("Sky_nk3vy")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="directional_light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.565326, -0.65611, -0.499925, -0.218464, -0.465332, 0.857753, -0.795412, 0.594126, 0.119728, -8.31425, 11.8481, 0)
-light_energy = 5.718
-
-[node name="directional_light_2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.443196, -0.830415, -0.337622, -0.218464, -0.465332, 0.857753, -0.869397, -0.306394, -0.387649, -8.31425, 26.0604, -91.7978)
-light_energy = 5.718
+transform = Transform3D(-0.972447, 0.177099, -0.1516, -0.143359, 0.0585133, 0.98794, 0.183833, 0.982452, -0.0315125, -8.31425, 113.787, 44.6879)
+light_energy = 7.512
+shadow_enabled = true
 
 [node name="LevelCore" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -98,3 +108,6 @@ material = ExtResource("2_swmnv")
 [node name="Portal" parent="." instance=ExtResource("4_6igiq")]
 transform = Transform3D(0.0254965, 0, -0.999675, 0, 1, 0, 0.999675, 0, 0.0254965, -0.0137179, 0.982659, -14.42)
 target_scene = "res://levels/level_3/level_3.tscn"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p2565")
