@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqhowbbgirkl6"]
+[gd_scene load_steps=8 format=3 uid="uid://bqhowbbgirkl6"]
 
 [ext_resource type="Script" path="res://scripts/entity_scripts/Player/Player.gd" id="1_36g87"]
+[ext_resource type="PackedScene" uid="uid://dts76apty278w" path="res://utilities/pause_menu/pause_menu.tscn" id="2_6bujx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6h50"]
 albedo_color = Color(0.0705882, 0, 0.411765, 1)
@@ -43,3 +44,5 @@ spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.42522)
+
+[node name="Player@PauseMenu" parent="." instance=ExtResource("2_6bujx")]

@@ -15,9 +15,9 @@ pressed = true
 [sub_resource type="Shortcut" id="Shortcut_4sp6h"]
 events = [SubResource("InputEventAction_vp8hl")]
 
-[sub_resource type="Animation" id="Animation_gtoen"]
-resource_name = "Unpause"
-length = 0.001
+[sub_resource type="Animation" id="Animation_u4h8i"]
+resource_name = "Pause"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -25,10 +25,10 @@ tracks/0/path = NodePath(".:material:shader_parameter/blur")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [null]
+"values": [null, 2.5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -37,10 +37,10 @@ tracks/1/path = NodePath(".:material:shader_parameter/brightness")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [1.0]
+"values": [1.0, 0.9]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -49,10 +49,10 @@ tracks/2/path = NodePath("CenterContainer:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -61,10 +61,10 @@ tracks/3/path = NodePath(".:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_6pobq"]
@@ -118,9 +118,9 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_u4h8i"]
-resource_name = "Pause"
-length = 0.3
+[sub_resource type="Animation" id="Animation_gtoen"]
+resource_name = "Unpause"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -128,10 +128,10 @@ tracks/0/path = NodePath(".:material:shader_parameter/blur")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [null, 2.5]
+"values": [null]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -140,10 +140,10 @@ tracks/1/path = NodePath(".:material:shader_parameter/brightness")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0, 0.9]
+"values": [1.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -152,10 +152,10 @@ tracks/2/path = NodePath("CenterContainer:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -164,10 +164,10 @@ tracks/3/path = NodePath(".:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cr5ru"]
@@ -189,7 +189,6 @@ script = ExtResource("2_pyv61")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -198,34 +197,47 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 custom_minimum_size = Vector2(512, 256)
-layout_mode = 2
+offset_left = 320.0
+offset_top = 196.0
+offset_right = 832.0
+offset_bottom = 452.0
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
-layout_mode = 2
+offset_right = 512.0
+offset_bottom = 256.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
+offset_left = 16.0
+offset_right = 496.0
+offset_bottom = 240.0
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+offset_right = 480.0
+offset_bottom = 48.0
 theme_override_font_sizes/font_size = 32
 text = "Pause"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+offset_top = 52.0
+offset_right = 480.0
+offset_bottom = 56.0
 
 [node name="ResumeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+offset_top = 60.0
+offset_right = 480.0
+offset_bottom = 148.0
 size_flags_vertical = 3
 shortcut = SubResource("Shortcut_4sp6h")
 text = "Resume"
 
 [node name="LevelSelectButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+offset_top = 152.0
+offset_right = 480.0
+offset_bottom = 240.0
 size_flags_vertical = 3
 text = "Level Select Menu"
 
