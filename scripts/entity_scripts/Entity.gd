@@ -74,4 +74,6 @@ func apply_controller_rotation():
 	if InputEventJoypadMotion:
 		rotate_y(deg_to_rad(-axis_vector.x) * controller_sensitivity)
 		spring_arm.rotate_x(deg_to_rad(-axis_vector.y) * controller_sensitivity)
+		
+		
 	
