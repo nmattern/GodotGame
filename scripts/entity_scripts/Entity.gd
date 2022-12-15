@@ -78,8 +78,8 @@ func modify_stamina(amount: float):
 		current_stamina += amount
 		
 
-func load_ability(name: String):
-	var scene = load("res://abilities/" + name + "/" + name + ".tscn")
+func load_ability(ability_name: String):
+	var scene = load("res://abilities/" + ability_name + "/" + ability_name + ".tscn")
 	var scene_node = scene.instantiate()
 	add_child(scene_node)
 	return scene_node

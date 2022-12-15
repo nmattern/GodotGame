@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://37mgqp6tpict"]
+[gd_scene load_steps=5 format=3 uid="uid://3wdxv74fqq57"]
 
-[node name="level_3" type="Node"]
+[ext_resource type="Material" uid="uid://bcexwxg8cnger" path="res://textures/test_grid_dark.tres" id="1_0ardc"]
+[ext_resource type="PackedScene" uid="uid://bqhowbbgirkl6" path="res://scripts/entity_scripts/Player/Player.tscn" id="2_qt3rg"]
+[ext_resource type="PackedScene" uid="uid://dts76apty278w" path="res://utilities/pause_menu/pause_menu.tscn" id="3_qssh8"]
+[ext_resource type="PackedScene" uid="uid://colktv10wis3u" path="res://scripts/object_scripts/portal/Portal.tscn" id="4_32l1a"]
+
+[node name="level_3" type="Node3D"]
+
+[node name="level_core" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="level_core"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0546751, 0)
+radius = 24.7332
+height = 0.758563
+material = ExtResource("1_0ardc")
+
+[node name="Player" parent="." instance=ExtResource("2_qt3rg")]
+
+[node name="PauseMenu" parent="Player" instance=ExtResource("3_qssh8")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.141965, -0.796421, -0.587843, 0.370739, -0.507854, 0.777584, -0.917823, -0.328326, 0.223166, -23.0874, 20.6424, 0)
+light_energy = 7.6
+light_indirect_energy = 3.224
+light_angular_distance = 0.17
+
+[node name="Portal" parent="." instance=ExtResource("4_32l1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5166, 1.33106, 0)
+target_scene = "res://levels/level_1/level_1.tscn"

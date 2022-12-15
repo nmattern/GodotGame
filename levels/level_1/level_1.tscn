@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://e5ykmegi3x63"]
+[gd_scene load_steps=5 format=3 uid="uid://e5ykmegi3x63"]
 
 [ext_resource type="PackedScene" uid="uid://bqhowbbgirkl6" path="res://scripts/entity_scripts/Player/Player.tscn" id="2_6ae6e"]
 [ext_resource type="Material" uid="uid://bcexwxg8cnger" path="res://textures/test_grid_dark.tres" id="2_swmnv"]
 [ext_resource type="PackedScene" uid="uid://dts76apty278w" path="res://utilities/pause_menu/pause_menu.tscn" id="3_a8twt"]
+[ext_resource type="PackedScene" uid="uid://colktv10wis3u" path="res://scripts/object_scripts/portal/Portal.tscn" id="4_6igiq"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -91,27 +92,9 @@ height = 6.24962
 material = ExtResource("2_swmnv")
 
 [node name="Player" parent="." instance=ExtResource("2_6ae6e")]
-max_speed = null
-acceleration = null
-friction = null
-air_friction = null
-gravity = null
-jump_impulse = null
-mouse_sensitivity = null
-controller_sensitivity = null
-rotation_speed = null
-max_health = null
-current_health = null
-health_regen = null
-armor = null
-max_mana = null
-current_mana = null
-mana_regen = null
-max_stamina = null
-current_stamina = null
-stamina_regen = null
-ability_1_cooldown = null
-ability_2_cooldown = null
-ability_3_cooldown = null
 
 [node name="PauseMenu" parent="Player" instance=ExtResource("3_a8twt")]
+
+[node name="Portal" parent="." instance=ExtResource("4_6igiq")]
+transform = Transform3D(0.0254965, 0, -0.999675, 0, 1, 0, 0.999675, 0, 0.0254965, -0.0137179, 0.982659, -14.42)
+target_scene = "res://levels/level_3/level_3.tscn"
