@@ -16,6 +16,7 @@ extends Entity
 var player_velocity = Vector3.ZERO
 var snap_vector = Vector3.ZERO
 
+var dash = load_ability("Dash")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -50,41 +51,6 @@ func _physics_process(delta):
 	jump()
 	apply_controller_rotation()
 	spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-75), deg_to_rad(75))
-	
-	
-
-	
+	dashing = dash.execute(self, direction, delta)
 	
 
-	
-	
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

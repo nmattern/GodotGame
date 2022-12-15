@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gjsfs5kl13vm"]
 
-[sub_resource type="GDScript" id="GDScript_40svb"]
+[sub_resource type="GDScript" id="GDScript_0fpw3"]
 script/source = "extends Button
 
 
@@ -34,7 +34,7 @@ offset_right = 200.0
 offset_bottom = 150.0
 pivot_offset = Vector2(100, 75)
 text = "Level 1"
-script = SubResource("GDScript_40svb")
+script = SubResource("GDScript_0fpw3")
 
 [connection signal="mouse_entered" from="." to="." method="_on_lvl_btn_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_lvl_btn_mouse_exited"]

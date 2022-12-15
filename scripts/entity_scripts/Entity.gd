@@ -31,6 +31,7 @@ extends CharacterBody3D
 @onready var spring_arm = $SpringArm3D
 @onready var pivot = $Pivot
 
+var dashing = false
 
 func regen_health():
 	if (current_health < max_health):
@@ -75,6 +76,13 @@ func modify_stamina(amount: float):
 	elif current_stamina + amount < 0: current_stamina = 0
 	else:
 		current_stamina += amount
+		
+
+func load_ability(name: String):
+	var scene = load("res://abilities/" + name + "/" + name + ".tscn")
+	var scene_node = scene.instantiate()
+	add_child(scene_node)
+	return scene_node
 
 
 ## This is a function to calculate the input vector given defined inputs
