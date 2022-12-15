@@ -18,19 +18,19 @@ var snap_vector = Vector3.ZERO
 
 
 func _ready():
+	var overlay = load("res://utilities/debug_overlay/debug_overlay.tscn").instantiate()
+	add_child(overlay)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 ## This function handles the mouse click events and spring arm movement
 func _unhandled_input(event):
+	
 	if event.is_action_pressed("click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if event.is_action_pressed("toggle_mouse_captured"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		$PauseMenu.pause()
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
