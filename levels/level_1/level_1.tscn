@@ -91,5 +91,27 @@ height = 6.24962
 material = ExtResource("2_swmnv")
 
 [node name="Player" parent="." instance=ExtResource("2_6ae6e")]
+max_speed = null
+acceleration = null
+friction = null
+air_friction = null
+gravity = null
+jump_impulse = null
+mouse_sensitivity = null
+controller_sensitivity = null
+rotation_speed = null
+max_health = null
+current_health = null
+health_regen = null
+armor = null
+max_mana = null
+current_mana = null
+mana_regen = null
+max_stamina = null
+current_stamina = null
+stamina_regen = null
+ability_1_cooldown = null
+ability_2_cooldown = null
+ability_3_cooldown = null
 
 [node name="PauseMenu" parent="Player" instance=ExtResource("3_a8twt")]

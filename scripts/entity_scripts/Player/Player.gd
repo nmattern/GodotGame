@@ -21,6 +21,9 @@ var dash = load_ability("Dash")
 func _ready():
 	var overlay = load("res://utilities/debug_overlay/debug_overlay.tscn").instantiate()
 	add_child(overlay)
+	overlay.add_value("Health", self, "current_health", false)
+	overlay.add_value("Stamina", self, "current_stamina", false)
+	overlay.add_value("Mana", self, "current_mana", false)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -52,5 +55,9 @@ func _physics_process(delta):
 	apply_controller_rotation()
 	spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-75), deg_to_rad(75))
 	dashing = dash.execute(self, direction)
+	regen_health(delta)
+	regen_stamina(delta)
+	regen_mana(delta)
+
 	
 

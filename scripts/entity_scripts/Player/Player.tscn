@@ -21,6 +21,28 @@ size = Vector3(0.2, 0.2, 1)
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730326, 0)
 script = ExtResource("1_36g87")
+max_speed = null
+acceleration = null
+friction = null
+air_friction = null
+gravity = null
+jump_impulse = null
+mouse_sensitivity = null
+controller_sensitivity = null
+rotation_speed = null
+max_health = null
+current_health = null
+health_regen = null
+armor = null
+max_mana = null
+current_mana = null
+mana_regen = null
+max_stamina = null
+current_stamina = null
+stamina_regen = null
+ability_1_cooldown = null
+ability_2_cooldown = null
+ability_3_cooldown = null
 
 [node name="Pivot" type="Marker3D" parent="."]
 

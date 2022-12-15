@@ -13,16 +13,16 @@ extends CharacterBody3D
 
 @export var max_health : float = 100
 @export var current_health : float = 100
-@export var health_regen : float = 1
+@export var health_regen_rate : float = 1
 @export var armor : float = 0
 
 @export var max_mana : float = 100
 @export var current_mana : float = 100
-@export var mana_regen : float = 1
+@export var mana_regen_rate : float = 1
 
 @export var max_stamina : float = 100
 @export var current_stamina : float = 100
-@export var stamina_regen : float = 1
+@export var stamina_regen_rate : float = 5
 
 @export var ability_1_cooldown : float = 10
 @export var ability_2_cooldown : float = 10
@@ -33,28 +33,28 @@ extends CharacterBody3D
 
 var dashing = false
 
-func regen_health():
+func regen_health(delta):
 	if (current_health < max_health):
-		if ((health_regen + current_health) > max_health):
+		if (((delta * health_regen_rate) + current_health) > max_health):
 			current_health = max_health
 		else:
-			current_health += health_regen
+			current_health += (delta * health_regen_rate)
 			
 			
-func regen_mana():
+func regen_mana(delta):
 	if (current_mana < max_mana):
-		if ((mana_regen + current_mana) > max_mana):
+		if (((delta*mana_regen_rate) + current_mana) > max_mana):
 			current_mana = max_mana
 		else:
-			current_mana += mana_regen
+			current_mana += (delta * mana_regen_rate)
 
 
-func regen_stamina():
+func regen_stamina(delta):
 	if (current_stamina < max_stamina):
-		if ((stamina_regen + current_stamina) > max_stamina):
+		if (((delta * stamina_regen_rate) + current_stamina) > max_stamina):
 			current_stamina = max_stamina
 		else:
-			current_stamina += stamina_regen
+			current_stamina += (delta * stamina_regen_rate)
 			
 			
 func modify_health(amount: float):
